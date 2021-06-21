@@ -19,7 +19,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.cartesian_2d = exports.a_star = void 0;
+exports.cartesian_2d = exports.a_star = exports.build_time = exports.version = void 0;
+var version_1 = require("./generated_code/version");
+Object.defineProperty(exports, "version", { enumerable: true, get: function () { return version_1.version; } });
+Object.defineProperty(exports, "build_time", { enumerable: true, get: function () { return version_1.build_time; } });
 var cartesian_2d = __importStar(require("./cartesian_2d"));
 exports.cartesian_2d = cartesian_2d;
 var StringSet = require('Set'), Heap = require('heap'), dict = require('dict');

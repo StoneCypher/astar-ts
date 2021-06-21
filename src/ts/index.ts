@@ -1,4 +1,5 @@
 
+import { version, build_time }                                              from './generated_code/version';
 import { AStarParamType, AStarResultType, AStarResultStatus, InternalNode } from './types';
 import * as cartesian_2d                                                    from './cartesian_2d';
 
@@ -214,4 +215,4 @@ function heapComparator<NodeType>(a: InternalNode<NodeType>, b: InternalNode<Nod
 
 
 
-export { a_star, cartesian_2d };
+export { version, build_time, a_star, cartesian_2d };
