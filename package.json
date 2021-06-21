@@ -1,13 +1,14 @@
 {
   "name": "astar-ts",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Generic synchronous A* search algorithm in TypeScript.  Descends from andrewrk/node-astar",
   "main": "index.js",
   "scripts": {
     "clean": "rimraf -f build && rimraf -f docs && rimraf -f dist && mkdir build && mkdir docs && mkdir dist && cd build && mkdir ts && mkdir rollup && mkdir terser && cd ../src/ts && rimraf -f generated_code && mkdir generated_code && cd ../..",
     "typescript": "tsc --build tsconfig.json",
-    "build": "npm run clean && npm run typescript",
-    "test": "node test/test.js"
+    "build": "npm run clean && npm run typescript && npm run test && npm run dist",
+    "dist": "cp build/ts/index.js dist/ && cp build/ts/*.d.ts dist/",
+    "test": "jest"
   },
   "repository": "git://github.com/StoneCypher/astar-ts.git",
   "authors": [
@@ -16,6 +17,7 @@
   ],
   "license": "BSD",
   "devDependencies": {
+    "@types/jest": "^26.0.23",
     "dict": "^1.4.0",
     "heap": "^0.2.6",
     "jest": "^27.0.4",

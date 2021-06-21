@@ -25,9 +25,20 @@ type InternalNode<NodeType> = {
   parent? : InternalNode<NodeType>
 };
 
+type Maze = {
+  name      : string,
+  solve4    : number | null,
+  solve8    : number | null,
+  closest4? : number,
+  closest8? : number,
+  map       : string[],
+  start     : [number, number],
+  end       : [number, number]
+};
 
 
 
 
-export{ AStarParamType, AStarResultType, AStarResultStatus, InternalNode };
+
+export{ AStarParamType, AStarResultType, AStarResultStatus, InternalNode, Maze };
 

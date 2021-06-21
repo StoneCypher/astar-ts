@@ -1,5 +1,6 @@
 
 import { AStarParamType, AStarResultType, AStarResultStatus, InternalNode } from './types';
+import * as cartesian_2d                                                    from './cartesian_2d';
 
 
 
@@ -15,28 +16,22 @@ const StringSet = require('Set'),
 
 function enforce_config<NodeType>(params: AStarParamType<NodeType>) {
 
-  if (params.start === undefined) {
-    throw new Error('Must provide a starting point for the search as `config.start`');
-  }
+  const items = {
+    start: 'starting point for the search as `config.start`',
+    isEnd: 'function evaluating whether a cell is an end point to boolean as `config.isEnd`',
+    neighbor: 'function returning the neighbors of a cell to node array as `config.neighbor`',
+    distance: 'function returning the distance between two cells to number as `config.distance`',
+    heuristic: 'best-guess no-overestimate distance-to-end to number as `config.heuristic`'
+  };
 
-  if (params.isEnd === undefined) {
-    throw new Error('Must provide a function evaluating whether a cell is an end point to boolean as `config.isEnd`');
-  }
-
-  if (params.neighbor === undefined) {
-    throw new Error('Must provide a function returning the neighbors of a cell to node array as `config.neighbor`');
-  }
-
-  if (params.distance === undefined) {
-    throw new Error('Must provide a function returning the distance between two cells to number as `config.distance`');
-  }
-
-  if (params.heuristic === undefined) {
-    throw new Error('Must provide a function returning the best-guess no-overestimate of distance-to-end to number as `config.heuristic`');
-  }
+  Object.keys(items).forEach( key => {
+    if ((params as any)[key] === undefined) {
+      throw new Error(`Must provide a ${(items as any)[key]}`);
+    }
+  });
 
   const timeout: number = (params.timeout === undefined)
-                        ? Number.MAX_SAFE_INTEGER
+                        ? 5000 // if it's running for 5 seconds and you didn't explicitly okay that, something is wrong
                         : params.timeout;
 
   if ( (!( Number.isInteger(timeout) )) || (!( timeout > 0 )) ) {
@@ -133,20 +128,16 @@ function a_star<NodeType = unknown>(params: AStarParamType<NodeType>): AStarResu
     var node = openHeap.pop();
     openDataMap.delete(hash(node.data));
 
-    if (params.isEnd(node.data)) { // done
-      return success_result(node);
-//    return { status: 'success', cost: node.g, path: reconstructPath(node) };
-    }
+    // if this, finished
+    if (params.isEnd(node.data)) { return success_result(node); }
 
-    // not done yet
+    // otherwise, not finished
     closedDataSet.add(hash(node.data));
     var neighbors = params.neighbor(node.data);
     neighbors.forEach( neighborData => {
 
-      if (closedDataSet.contains(hash(neighborData))) {
-        // skip closed neighbors
-        return;
-      }
+      // skip closed neighbors
+      if (closedDataSet.contains(hash(neighborData))) { return; }
 
       var gFromThisNode = node.g + params.distance(node.data, neighborData);
       var neighborNode = openDataMap.get(hash(neighborData));
@@ -154,18 +145,12 @@ function a_star<NodeType = unknown>(params: AStarParamType<NodeType>): AStarResu
 
       if (neighborNode === undefined) {
 
-        // add neighbor to the open set
-        neighborNode = {
-          data: neighborData,
-        };
-
-        // other properties will be set later
-        openDataMap.set(hash(neighborData), neighborNode);
+        neighborNode = { data: neighborData };               // add neighbor to the open set
+        openDataMap.set(hash(neighborData), neighborNode);   // other properties will be set later
 
       } else {
 
-        // skip this one because another route is faster
-        if (neighborNode.g < gFromThisNode) { return; }
+        if (neighborNode.g < gFromThisNode) { return; }          // skip this one because another route is faster
         else                                { update = true; }
 
       }
@@ -173,9 +158,9 @@ function a_star<NodeType = unknown>(params: AStarParamType<NodeType>): AStarResu
       // found a new or better route.
       // update this neighbor with this node as its new parent
       neighborNode.parent = node;
-      neighborNode.g = gFromThisNode;
-      neighborNode.h = params.heuristic(neighborData);
-      neighborNode.f = gFromThisNode + neighborNode.h;
+      neighborNode.g      = gFromThisNode;
+      neighborNode.h      = params.heuristic(neighborData);
+      neighborNode.f      = gFromThisNode + neighborNode.h;
 
       if (neighborNode.h < bestNode.h) bestNode = neighborNode;
 
@@ -229,4 +214,4 @@ function heapComparator<NodeType>(a: InternalNode<NodeType>, b: InternalNode<Nod
 
 
 
-export { a_star };
+export { a_star, cartesian_2d };

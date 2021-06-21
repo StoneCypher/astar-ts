@@ -1,17 +1,51 @@
 # a-star
 
-Generic synchronous [A* search algorithm](http://en.wikipedia.org/wiki/A*_search_algorithm).
+Quick, easy `A*`, with support for square, hex, and custom graphs, custom distance functions, and more.  Well tested
+typescript, with lots of Javascript options.
+
+Generic synchronous [A* search algorithm](http://en.wikipedia.org/wiki/A*_search_algorithm) in TypeScript.  Descends
+directly from and mostly writen by [andrewrk/node-astar](https://github.com/andrewrk/node-astar).
+
+Fork adds convenience systems so you don't have to define your own graph primitives, and converts to TypeScript and
+modern norms (library is almost a decade old and still near-ideal.)
+
+Now provided: IIFE (minified and non,) CommonJS (minified only,) and ES6 (minified and non) bundles, plus sourcemaps for IIFE non-minified and ES6 non-minified.
+
+
+
+<br/><br/>
 
 ## Usage
 
-```js
-var aStar = require('a-star');
-// if this is going to take a while you may want to child_process.fork
-// and pass the results to the parent process
-// see below for options
-var path = aStar(options);
+```typescript
+import { astar, cartesian_2d } from 'astar-ts';
+const  { diagonal_distance, bounded_neighbor_no_diag_factory } = cartesian_2d;
+
+const path = aStar({
+  start     : [1,1],
+  isEnd     : ([x,y]) => ((x === 18) && (y === 18) ),
+  neighbor  : bounded_neighbor_no_diag_factory(20,20),
+  distance  : diagonal_distance,
+  heuristic : diagonal_distance
+});
+
 console.log(path);
 ```
+
+The expected output is
+
+```
+
+```
+
+If you're in `node`, instead of `import`, you can
+
+```javascript
+const astar_ts = require('astar-ts');
+const { astar, cartesian_2d } = astar_ts;
+```
+
+And then the rest will work as previously.
 
 ## Documentation
 
