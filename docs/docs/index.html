@@ -1,0 +1,233 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>astar-ts</title>
+	<meta name="description" content="Documentation for astar-ts">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">astar-ts</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>astar-ts</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#astar-ts" id="astar-ts" style="color: inherit; text-decoration: none;">
+					<h1>astar-ts</h1>
+				</a>
+				<ul>
+					<li><a href="https://github.com/StoneCypher/astar-ts/">github</a></li>
+					<li><a href="https://stonecypher.github.io/astar-ts/docs/index.html">NPM</a></li>
+					<li><a href="https://stonecypher.github.io/astar-ts/docs/index.html">Documentation</a></li>
+				</ul>
+				<p>Quick, easy <code>A*</code>, with support for square, hex, and custom graphs, custom distance functions, and more.  Well tested
+				typescript, with lots of Javascript options.</p>
+				<p>Generic synchronous <a href="http://en.wikipedia.org/wiki/A*_search_algorithm">A* search algorithm</a> in TypeScript.</p>
+				<p>Descends directly from <a href="https://github.com/andrewrk/node-astar">andrewrk/node-astar</a>.</p>
+				<p>Fork adds convenience systems so you don&#39;t have to define your own graph primitives, and converts to TypeScript and
+				modern norms (library is almost a decade old and still near-ideal.)</p>
+				<p>Now provided: IIFE (minified and non,) CommonJS (minified only,) and ES6 (minified and non) bundles, plus sourcemaps for IIFE non-minified and ES6 non-minified.</p>
+				<p><br/><br/></p>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
+				<pre><code><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">install</span><span style="color: #000000"> --</span><span style="color: #001080">save</span><span style="color: #000000">-</span><span style="color: #001080">dev</span><span style="color: #000000"> </span><span style="color: #001080">astar</span><span style="color: #000000">-</span><span style="color: #001080">ts</span>
+</code></pre>
+				<p><br/><br/></p>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
+				<p>For <code>typescript</code> and most bundlers (rollup, webpack, parcel, rome, etc), use the <code>es6 module</code> through <code>import</code>/<code>export</code>:</p>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">a_star</span><span style="color: #000000">, </span><span style="color: #001080">cartesian_2d</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;astar-ts&#039;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #0070C1">diagonal_distance</span><span style="color: #000000">, </span><span style="color: #0070C1">bounded_neighbor_no_diag_factory</span><span style="color: #000000"> } = </span><span style="color: #001080">cartesian_2d</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">config</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">  </span><span style="color: #001080">start     :</span><span style="color: #000000"> [</span><span style="color: #098658">18</span><span style="color: #000000">, </span><span style="color: #098658">18</span><span style="color: #000000">],</span>
+<span style="color: #000000">  </span><span style="color: #795E26">isEnd</span><span style="color: #001080">     :</span><span style="color: #000000"> ([</span><span style="color: #001080">x</span><span style="color: #000000">,</span><span style="color: #001080">y</span><span style="color: #000000">]) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> (</span><span style="color: #001080">x</span><span style="color: #000000">===</span><span style="color: #098658">0</span><span style="color: #000000">) &amp;&amp; (</span><span style="color: #001080">y</span><span style="color: #000000">===</span><span style="color: #098658">0</span><span style="color: #000000">),</span>
+<span style="color: #000000">  </span><span style="color: #001080">neighbor  :</span><span style="color: #000000"> </span><span style="color: #001080">cartesian_2d</span><span style="color: #000000">.</span><span style="color: #795E26">infinite_neighbor_with_diag_factory</span><span style="color: #000000">(),</span>
+<span style="color: #000000">  </span><span style="color: #001080">distance  :</span><span style="color: #000000"> </span><span style="color: #001080">cartesian_2d</span><span style="color: #000000">.</span><span style="color: #001080">diagonal_distance</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #795E26">heuristic</span><span style="color: #001080"> :</span><span style="color: #000000"> ([</span><span style="color: #001080">x</span><span style="color: #000000">,</span><span style="color: #001080">y</span><span style="color: #000000">]) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">cartesian_2d</span><span style="color: #000000">.</span><span style="color: #795E26">diagonal_distance</span><span style="color: #000000">([</span><span style="color: #001080">x</span><span style="color: #000000">,</span><span style="color: #001080">y</span><span style="color: #000000">], [</span><span style="color: #098658">0</span><span style="color: #000000">,</span><span style="color: #098658">0</span><span style="color: #000000">])</span>
+<span style="color: #000000">};</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">result1</span><span style="color: #000000"> = </span><span style="color: #795E26">a_star</span><span style="color: #000000">(</span><span style="color: #001080">config</span><span style="color: #000000">);</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`result1.path.length </span><span style="color: #0000FF">${</span><span style="color: #001080">result1</span><span style="color: #000000FF">.</span><span style="color: #001080">path</span><span style="color: #000000FF">.</span><span style="color: #001080">length</span><span style="color: #0000FF">}</span><span style="color: #A31515"> should be 19</span><span style="color: #EE0000">\n</span><span style="color: #A31515">`</span><span style="color: #000000">);</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`result1.path is [</span><span style="color: #0000FF">${</span><span style="color: #001080">result1</span><span style="color: #000000FF">.</span><span style="color: #001080">path</span><span style="color: #000000FF">.</span><span style="color: #795E26">join</span><span style="color: #000000FF">(</span><span style="color: #A31515">&#039;] [&#039;</span><span style="color: #000000FF">)</span><span style="color: #0000FF">}</span><span style="color: #A31515">]</span><span style="color: #EE0000">\n</span><span style="color: #A31515">`</span><span style="color: #000000">);</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`result1.cost is </span><span style="color: #0000FF">${</span><span style="color: #001080">result1</span><span style="color: #000000FF">.</span><span style="color: #001080">cost</span><span style="color: #0000FF">}</span><span style="color: #EE0000">\n</span><span style="color: #A31515">`</span><span style="color: #000000">);</span>
+</code></pre>
+				<p>The expected output is</p>
+				<pre><code><span style="color: #001080">result1</span><span style="color: #000000">.</span><span style="color: #001080">path</span><span style="color: #000000">.</span><span style="color: #001080">length</span><span style="color: #000000"> </span><span style="color: #098658">19</span><span style="color: #000000"> </span><span style="color: #001080">should</span><span style="color: #000000"> </span><span style="color: #001080">be</span><span style="color: #000000"> </span><span style="color: #098658">19</span>
+
+<span style="color: #001080">result1</span><span style="color: #000000">.</span><span style="color: #001080">path</span><span style="color: #000000"> </span><span style="color: #001080">is</span><span style="color: #000000"> [</span><span style="color: #098658">18</span><span style="color: #000000">,</span><span style="color: #098658">18</span><span style="color: #000000">] [</span><span style="color: #098658">17</span><span style="color: #000000">,</span><span style="color: #098658">17</span><span style="color: #000000">] [</span><span style="color: #098658">16</span><span style="color: #000000">,</span><span style="color: #098658">16</span><span style="color: #000000">] [</span><span style="color: #098658">15</span><span style="color: #000000">,</span><span style="color: #098658">15</span><span style="color: #000000">] [</span><span style="color: #098658">14</span><span style="color: #000000">,</span><span style="color: #098658">14</span><span style="color: #000000">] [</span><span style="color: #098658">13</span><span style="color: #000000">,</span><span style="color: #098658">13</span><span style="color: #000000">] [</span><span style="color: #098658">12</span><span style="color: #000000">,</span><span style="color: #098658">12</span><span style="color: #000000">] [</span><span style="color: #098658">11</span><span style="color: #000000">,</span><span style="color: #098658">11</span><span style="color: #000000">]</span>
+<span style="color: #000000">[</span><span style="color: #098658">10</span><span style="color: #000000">,</span><span style="color: #098658">10</span><span style="color: #000000">] [</span><span style="color: #098658">9</span><span style="color: #000000">,</span><span style="color: #098658">9</span><span style="color: #000000">] [</span><span style="color: #098658">8</span><span style="color: #000000">,</span><span style="color: #098658">8</span><span style="color: #000000">] [</span><span style="color: #098658">7</span><span style="color: #000000">,</span><span style="color: #098658">7</span><span style="color: #000000">] [</span><span style="color: #098658">6</span><span style="color: #000000">,</span><span style="color: #098658">6</span><span style="color: #000000">] [</span><span style="color: #098658">5</span><span style="color: #000000">,</span><span style="color: #098658">5</span><span style="color: #000000">] [</span><span style="color: #098658">4</span><span style="color: #000000">,</span><span style="color: #098658">4</span><span style="color: #000000">] [</span><span style="color: #098658">3</span><span style="color: #000000">,</span><span style="color: #098658">3</span><span style="color: #000000">] [</span><span style="color: #098658">2</span><span style="color: #000000">,</span><span style="color: #098658">2</span><span style="color: #000000">] [</span><span style="color: #098658">1</span><span style="color: #000000">,</span><span style="color: #098658">1</span><span style="color: #000000">] [</span><span style="color: #098658">0</span><span style="color: #000000">,</span><span style="color: #098658">0</span><span style="color: #000000">]</span>
+
+<span style="color: #001080">result1</span><span style="color: #000000">.</span><span style="color: #001080">cost</span><span style="color: #000000"> </span><span style="color: #001080">is</span><span style="color: #000000"> </span><span style="color: #098658">25.45584412271572</span>
+</code></pre>
+				<p>Instructions are also offered for <a href="stonecypher.github.io/astar-ts/docs/index.html">CommonJS / require</a>
+				and <a href="stonecypher.github.io/astar-ts/docs/index.html">iife / script tags</a>.</p>
+				<p><br/><br/></p>
+				<a href="#config" id="config" style="color: inherit; text-decoration: none;">
+					<h2>Config</h2>
+				</a>
+				<p>You must pass an object - the <code>config</code> - to <code>a_star()</code>.  This object has the
+				following members:</p>
+				<ul>
+					<li><code>start</code><ul>
+							<li>The starting node for the path.</li>
+						</ul>
+					</li>
+					<li><code>isEnd</code><ul>
+							<li><code>function(node): bool</code> returns whether a node is an acceptable endpoint</li>
+						</ul>
+					</li>
+					<li><code>neighbor</code><ul>
+							<li><code>function(node): node[]</code> returns an array of neighbors for a node</li>
+						</ul>
+					</li>
+					<li><code>distance</code><ul>
+							<li><code>function(a, b): number</code> returns the distance cost between two nodes</li>
+						</ul>
+					</li>
+					<li><code>heuristic</code><ul>
+							<li><code>function(node): number</code> returns a heuristic guess of the cost from <code>node</code>
+							to an endpoint.</li>
+						</ul>
+					</li>
+					<li><code>hash</code><ul>
+							<li><code>function(node): string</code> returns a unique string for a node. This is
+								so that we can put nodes in heap and set data structures which are based
+							on plain old JavaScript objects. Defaults to using <code>node.toString</code>.</li>
+						</ul>
+					</li>
+					<li><code>timeout</code><ul>
+							<li>optional limit to amount of milliseconds to search before returning null.
+							Defaults to three seconds.  Pass <code>undefined</code> to disable.</li>
+						</ul>
+					</li>
+				</ul>
+				<p>The data type for nodes is unrestricted.</p>
+				<p><br/><br/></p>
+				<a href="#return-value" id="return-value" style="color: inherit; text-decoration: none;">
+					<h2>Return Value</h2>
+				</a>
+				<p>The pathfinder will return an object with three members: <code>status</code>, <code>path</code>, and <code>cost</code>.</p>
+				<p><code>status</code> will be one of three strings:</p>
+				<ol>
+					<li><code>&#39;success&#39;</code> when a path is found, or</li>
+					<li><code>&#39;no path&#39;</code> when no path exists, or</li>
+					<li><code>&#39;timeout&#39;</code> when the pathfinder ran too long</li>
+				</ol>
+				<p><code>path</code> will be a path, which is an array of whatever you have provided as nodes.  The array will always contain at least
+				the start cell.</p>
+				<ol>
+					<li>In a <code>success</code>, <code>path</code> will contain every cell from start to finish, including both start and finish.</li>
+					<li>In a <code>no path</code>, <code>path</code> will contain every cell from start to the closest cell the pathfinder could reach.</li>
+					<li>In a <code>timeout</code>, <code>path</code> will contain the best path the pathfinder could find in time, which usually won&#39;t reach the
+					end.</li>
+				</ol>
+				<p><code>cost</code> will be the sum cost cost of every step in reaching the final cell in the <code>path</code> provided.  Cost defaults to 1
+					for 4-way cartesian, and <code>sqrt(2)</code> for diagonals in 8-way, but varies for other map types (hex is uniform, irregular can
+				be anything, game maps&#39; cell types can be movement penalties, etc.)</p>
+				<pre><code class="language-javascript"><span style="color: #000000">{</span>
+<span style="color: #000000">  status : </span><span style="color: #A31515">&#039;success&#039;</span><span style="color: #000000">, </span><span style="color: #008000">// &#039;success&#039; | &#039;no path&#039; | &#039;timeout&#039;</span>
+<span style="color: #000000">  path   : [</span><span style="color: #001080">startNode</span><span style="color: #000000">, </span><span style="color: #001080">node1</span><span style="color: #000000">, </span><span style="color: #001080">node2</span><span style="color: #000000">, ..., </span><span style="color: #001080">endNode</span><span style="color: #000000">],</span>
+<span style="color: #000000">  cost   : </span><span style="color: #098658">1234.56</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p><br/><br/></p>
+				<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
+					<h1>Documentation</h1>
+				</a>
+				<p>Please see the <a href="stonecypher.github.io/astar-ts/docs/index.html">online documentation</a>.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="modules/cartesian_2d.html">cartesian_<wbr>2d</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="modules/str_irregular.html">str_<wbr>irregular</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#build_time" class="tsd-kind-icon">build_<wbr>time</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#version" class="tsd-kind-icon">version</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#a_star" class="tsd-kind-icon">a_<wbr>star</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

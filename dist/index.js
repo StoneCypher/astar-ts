@@ -19,12 +19,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.cartesian_2d = exports.a_star = exports.build_time = exports.version = void 0;
+exports.str_irregular = exports.cartesian_2d = exports.a_star = exports.build_time = exports.version = void 0;
 var version_1 = require("./generated_code/version");
 Object.defineProperty(exports, "version", { enumerable: true, get: function () { return version_1.version; } });
 Object.defineProperty(exports, "build_time", { enumerable: true, get: function () { return version_1.build_time; } });
 var cartesian_2d = __importStar(require("./cartesian_2d"));
 exports.cartesian_2d = cartesian_2d;
+var str_irregular = __importStar(require("./str_irregular"));
+exports.str_irregular = str_irregular;
 var StringSet = require('Set'), Heap = require('heap'), dict = require('dict');
 function enforce_config(params) {
     var items = {
@@ -106,8 +108,7 @@ function a_star(params) {
                 return;
             }
             var gFromThisNode = node.g + params.distance(node.data, neighborData);
-            var neighborNode = openDataMap.get(hash(neighborData));
-            var update = false;
+            var neighborNode = openDataMap.get(hash(neighborData)), update = false;
             if (neighborNode === undefined) {
                 neighborNode = { data: neighborData }; // add neighbor to the open set
                 openDataMap.set(hash(neighborData), neighborNode); // other properties will be set later

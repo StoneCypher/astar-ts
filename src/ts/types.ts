@@ -36,9 +36,18 @@ type Maze = {
   end       : [number, number]
 };
 
+type StrIrregularTriplet = [string, string, number];
+
+type StrIrregularList = StrIrregularTriplet[];
 
 
 
 
-export{ AStarParamType, AStarResultType, AStarResultStatus, InternalNode, Maze };
+
+export {
+  AStarParamType, AStarResultType, AStarResultStatus,
+  InternalNode,
+  Maze,
+  StrIrregularList, StrIrregularTriplet
+};
 

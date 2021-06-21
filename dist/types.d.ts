@@ -30,4 +30,6 @@ declare type Maze = {
     start: [number, number];
     end: [number, number];
 };
-export { AStarParamType, AStarResultType, AStarResultStatus, InternalNode, Maze };
+declare type StrIrregularTriplet = [string, string, number];
+declare type StrIrregularList = StrIrregularTriplet[];
+export { AStarParamType, AStarResultType, AStarResultStatus, InternalNode, Maze, StrIrregularList, StrIrregularTriplet };

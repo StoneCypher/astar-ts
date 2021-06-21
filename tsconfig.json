@@ -4,6 +4,7 @@
     "module": "commonjs",                           /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */
     "declaration": true,                            /* Generates corresponding '.d.ts' file. */
     "outDir": "./build/ts/",                        /* Redirect output structure to the directory. */
+    "downlevelIteration": true,                     /* Provide full support for iterables in 'for-of', spread, and destructuring when targeting 'ES5' or 'ES3'. */
     "strict": true,                                 /* Enable all strict type-checking options. */
     "noImplicitAny": true,                          /* Raise error on expressions and declarations with an implied 'any' type. */
     "strictNullChecks": true,                       /* Enable strict null checks. */

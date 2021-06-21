@@ -1,15 +1,17 @@
-# a-star
+# astar-ts
+
+* [github](https://github.com/StoneCypher/astar-ts/)
+* [NPM](https://stonecypher.github.io/astar-ts/docs/index.html)
+* [Documentation](https://stonecypher.github.io/astar-ts/docs/index.html)
 
 Quick, easy `A*`, with support for square, hex, and custom graphs, custom distance functions, and more.  Well tested
 typescript, with lots of Javascript options.
 
-Generic synchronous [A* search algorithm](http://en.wikipedia.org/wiki/A*_search_algorithm) in TypeScript.  Descends
-directly from and mostly writen by [andrewrk/node-astar](https://github.com/andrewrk/node-astar).
+Generic synchronous [A* search algorithm](http://en.wikipedia.org/wiki/A*_search_algorithm) in TypeScript.
 
-Fork adds convenience systems so you don't have to define your own graph primitives, and converts to TypeScript and
-modern norms (library is almost a decade old and still near-ideal.)
+Descends directly from [andrewrk/node-astar](https://github.com/andrewrk/node-astar).
 
-Now provided: IIFE (minified and non,) CommonJS (minified only,) and ES6 (minified and non) bundles, plus sourcemaps for IIFE non-minified and ES6 non-minified.
+
 
 
 
@@ -20,6 +22,7 @@ Now provided: IIFE (minified and non,) CommonJS (minified only,) and ES6 (minifi
 ```
 npm install --save-dev astar-ts
 ```
+
 
 
 
@@ -63,6 +66,44 @@ result1.cost is 25.45584412271572
 Instructions are also offered for [CommonJS / require](stonecypher.github.io/astar-ts/docs/index.html)
 and [iife / script tags](stonecypher.github.io/astar-ts/docs/index.html).
 
+
+
+
+
+<br/><br/>
+
+## Irregular maps
+
+`astar-ts` can also handle irregular maps.  Consider please this fake highway map:
+
+~[](./streetmap.png)
+
+To get from B to H, one is much better off with `[B, A, J, I, H]` than `[B, L, M, C, D, E, F, F, H]`.
+
+To represent this:
+
+```javascript
+const streets = [
+  ['B', 'A', 2],
+  ['B', 'L', 1],
+  ['L', 'M', 1],
+  ['M', 'C', 1],
+  ['C', 'K', 2],
+  ['A', 'K', 1],
+  ['A', 'J', 2],
+  ['J', 'I', 2],
+  ['I', 'H', 1],
+  ['H', 'G', 3],
+  ['G', 'F', 4],
+  ['F', 'K', 2],
+  ['F', 'E', 3],
+  ['E', 'D', 2],
+  ['D', 'C', 1]
+];
+```
+
+
+
 <br/><br/>
 
 ## Config
@@ -90,6 +131,7 @@ following members:
       Defaults to three seconds.  Pass `undefined` to disable.
 
 The data type for nodes is unrestricted.
+
 
 
 <br/><br/>

@@ -1,7 +1,9 @@
 
 import { version, build_time }                                              from './generated_code/version';
 import { AStarParamType, AStarResultType, AStarResultStatus, InternalNode } from './types';
+
 import * as cartesian_2d                                                    from './cartesian_2d';
+import * as str_irregular                                                   from './str_irregular';
 
 
 
@@ -18,11 +20,11 @@ const StringSet = require('Set'),
 function enforce_config<NodeType>(params: AStarParamType<NodeType>) {
 
   const items = {
-    start: 'starting point for the search as `config.start`',
-    isEnd: 'function evaluating whether a cell is an end point to boolean as `config.isEnd`',
-    neighbor: 'function returning the neighbors of a cell to node array as `config.neighbor`',
-    distance: 'function returning the distance between two cells to number as `config.distance`',
-    heuristic: 'best-guess no-overestimate distance-to-end to number as `config.heuristic`'
+    start     : 'starting point for the search as `config.start`',
+    isEnd     : 'function evaluating whether a cell is an end point to boolean as `config.isEnd`',
+    neighbor  : 'function returning the neighbors of a cell to node array as `config.neighbor`',
+    distance  : 'function returning the distance between two cells to number as `config.distance`',
+    heuristic : 'best-guess no-overestimate distance-to-end to number as `config.heuristic`'
   };
 
   Object.keys(items).forEach( key => {
@@ -140,9 +142,10 @@ function a_star<NodeType = unknown>(params: AStarParamType<NodeType>): AStarResu
       // skip closed neighbors
       if (closedDataSet.contains(hash(neighborData))) { return; }
 
-      var gFromThisNode = node.g + params.distance(node.data, neighborData);
-      var neighborNode = openDataMap.get(hash(neighborData));
-      var update = false;
+      const gFromThisNode = node.g + params.distance(node.data, neighborData);
+
+      let   neighborNode  = openDataMap.get(hash(neighborData)),
+            update        = false;
 
       if (neighborNode === undefined) {
 
@@ -215,4 +218,14 @@ function heapComparator<NodeType>(a: InternalNode<NodeType>, b: InternalNode<Nod
 
 
 
-export { version, build_time, a_star, cartesian_2d };
+export {
+
+  version,
+  build_time,
+
+  a_star,
+
+  cartesian_2d,
+  str_irregular
+
+};
